@@ -1,5 +1,7 @@
 public class AlphaButtonMatrix implements ButtonMatrix {
 
+    //alpha button matrix
+
     private String[][] top;
     private String[][] bottom;
 
