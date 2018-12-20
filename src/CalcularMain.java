@@ -6,6 +6,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import ui.AlphaButtonMatrix;
+import ui.CalcularButton;
+import ui.RegButtonMatrix;
+import ui.SecondButtonMatrix;
 
 import java.util.ArrayList;
 

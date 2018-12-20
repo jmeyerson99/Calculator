@@ -1,3 +1,5 @@
+package ui;
+
 public class AlphaButtonMatrix implements ButtonMatrix {
 
     //alpha button matrix

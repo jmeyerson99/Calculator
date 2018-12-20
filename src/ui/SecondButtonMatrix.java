@@ -1,3 +1,7 @@
+package ui;
+
+import ui.ButtonMatrix;
+
 public class SecondButtonMatrix implements ButtonMatrix {
 
     private String[][] top;

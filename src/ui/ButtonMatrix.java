@@ -1,3 +1,5 @@
+package ui;
+
 public interface ButtonMatrix {
 
     void topConfig();
