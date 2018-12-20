@@ -7,7 +7,6 @@ public class SecondButtonMatrix implements ButtonMatrix {
     {
         topConfig();
         bottomConfig();
-
     }
 
     @Override
@@ -65,7 +64,7 @@ public class SecondButtonMatrix implements ButtonMatrix {
         this.bottom[3][1] = "Arccsc";
         this.bottom[3][2] = "Arcsec";
         this.bottom[3][3] = "Arccot";
-        this.bottom[3][4] = "+";
+        this.bottom[3][4] = "";
 
         this.bottom[4][0] = "EE";
         this.bottom[4][1] = "";
