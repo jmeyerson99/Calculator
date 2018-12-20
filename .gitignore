@@ -1,0 +1,7 @@
+#This is the gitignore file
+
+#Ignore the workspace file
+.idea/workspace.xml
+
+# Compiled class file
+*.class
