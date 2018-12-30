@@ -29,4 +29,15 @@ public class CalcularButton extends Button {
         return this.col;
     }
 
+    public String getRegName() {
+        return regName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public String getAlphaName() {
+        return alphaName;
+    }
 }
