@@ -21,7 +21,8 @@ public class ParsingTester {
 
     public void parse(String equation)
     {
-        
+        parser.parseExpression(equation);
+        System.out.println("The answer is " + parser.getRpn().getTop());
     }
 
     public void parseAlgebra(String equation) {
@@ -42,8 +43,10 @@ public class ParsingTester {
         ParsingTester tester = new ParsingTester();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter an expression: ");
-        String equation = scanner.nextLine();// + " ";
+        while (true) {
+            String equation = scanner.nextLine();
 
-        tester.parse(equation);
+            tester.parse(equation);
+        }
     }
 }

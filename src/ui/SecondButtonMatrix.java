@@ -1,11 +1,10 @@
 package ui;
 
-import ui.ButtonMatrix;
-
 public class SecondButtonMatrix implements ButtonMatrix {
 
-    private String[][] top;
-    private String[][] bottom;
+    //2nd button matrix
+    public String[][] top;
+    public String[][] bottom;
 
     public SecondButtonMatrix ()
     {
@@ -93,15 +92,5 @@ public class SecondButtonMatrix implements ButtonMatrix {
         this.bottom[7][2] = "";
         this.bottom[7][3] = "+/-";
         this.bottom[7][4] = "Enter";
-    }
-
-    @Override
-    public String[][] getTop() {
-        return this.top;
-    }
-
-    @Override
-    public String[][] getBottom() {
-        return this.bottom;
     }
 }

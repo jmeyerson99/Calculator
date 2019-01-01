@@ -6,9 +6,23 @@ public class Calculator {
 
     private ArrayList<String> commandQueue;
 
+    public enum Mode {SECOND, ALPHA, REGULAR}
+    public Mode mode;
+
     public Calculator()
     {
         this.commandQueue = new ArrayList<>();
+        this.mode = Mode.REGULAR;
+    }
+
+    public Mode getMode()
+    {
+        return this.mode;
+    }
+
+    public void setMode(Mode mode)
+    {
+        this.mode = mode;
     }
 
     public void handleButton(String cmd, String mode)

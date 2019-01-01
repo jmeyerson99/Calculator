@@ -1,11 +1,11 @@
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import appl.ClickHandler;
+import javafx.application.Application; 
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.Calculator;
 import ui.AlphaButtonMatrix;
 import ui.CalcularButton;
 import ui.RegButtonMatrix;
@@ -47,26 +47,28 @@ public class CalcularMain extends Application
     private ArrayList<CalcularButton> topButtons;
     private ArrayList<CalcularButton> botButtons;
 
-    private String currMode;
+    private ArrayList<CalcularButton> allButtons;
+
+    private Calculator calculator;
 
     @Override
     public void start(Stage stage) {
-        this.currMode = "Regular";
-
         this.topButtons = new ArrayList<>();
         this.botButtons = new ArrayList<>();
+        this.allButtons = new ArrayList<>();
+        this.calculator = new Calculator();
 
         RegButtonMatrix bx = new RegButtonMatrix();
-        this.regTopNames = bx.getTop();
-        this.regBottomNames = bx.getBottom();
+        this.regTopNames = bx.top;
+        this.regBottomNames = bx.bottom;
 
         SecondButtonMatrix b = new SecondButtonMatrix();
-        this.secTopNames = b.getTop();
-        this.secBottomNames = b.getBottom();
+        this.secTopNames = b.top;
+        this.secBottomNames = b.bottom;
 
         AlphaButtonMatrix x = new AlphaButtonMatrix();
-        this.alphaTopNames = x.getTop();
-        this.alphaBottomNames = x.getBottom();
+        this.alphaTopNames = x.top;
+        this.alphaBottomNames = x.bottom;
 
         Scene sc = new Scene(makeView());
         stage.setScene(sc);
@@ -85,21 +87,17 @@ public class CalcularMain extends Application
 
     private GridPane makeBottomGrid() {
         GridPane gridPane = new GridPane();
-        for (int i = 0; i < bottomRows; i++)
-        {
-            for (int j = 0; j < bottomCols; j++)
-            {
+        for (int i = 0; i < bottomRows; i++) {
+            for (int j = 0; j < bottomCols; j++) {
                 CalcularButton butt = new CalcularButton(regBottomNames[i][j], secBottomNames[i][j], alphaBottomNames[i][j], i, j);
                 butt.setMinSize(60, 60);
                 butt.setMaxSize(60, 60);
                 butt.setText(regBottomNames[i][j]);
                 gridPane.add(butt, j, i);
                 this.botButtons.add(butt);
-                butt.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override public void handle(ActionEvent e) {
-                        console.setText("button " + butt.getText() + " was clicked");
-                    }
-                });
+                this.allButtons.add(butt);
+                ClickHandler handler = new ClickHandler(console, calculator, allButtons);
+                butt.setOnAction(handler);
             }
         }
         gridPane.setHgap(30);
@@ -110,10 +108,8 @@ public class CalcularMain extends Application
     private GridPane makeCenterGrid()
     {
         GridPane gridPane = new GridPane();
-        for (int i = 0; i < topRows; i++)
-        {
-            for (int j = 0; j < topCols; j++)
-            {
+        for (int i = 0; i < topRows; i++) {
+            for (int j = 0; j < topCols; j++) {
                 if (!this.regTopNames[i][j].equals("")) {
                     CalcularButton butt = new CalcularButton(regTopNames[i][j], secTopNames[i][j], alphaTopNames[i][j], i, j);
                     butt.setMinSize(60, 60);
@@ -121,73 +117,9 @@ public class CalcularMain extends Application
                     butt.setText(regTopNames[i][j]);
                     gridPane.add(butt, j, i);
                     this.topButtons.add(butt);
-                    butt.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override public void handle(ActionEvent e) {
-                            console.setText("button " + butt.getText() + " was clicked");
-                            if (butt.getText().equals("2nd"))
-                            {
-                                if (!currMode.equals("2nd")) {
-                                    for (CalcularButton b : topButtons) {
-                                        b.setText(secTopNames[b.getRow()][b.getCol()]);
-                                    }
-                                    for (CalcularButton b : botButtons) {
-                                        b.setText(secBottomNames[b.getRow()][b.getCol()]);
-                                    }
-                                    currMode = "2nd";
-                                }
-                                else {
-                                    for (CalcularButton b : topButtons)
-                                    {
-                                        b.setText(regTopNames[b.getRow()][b.getCol()]);
-                                    }
-                                    for (CalcularButton b : botButtons)
-                                    {
-                                        b.setText(regBottomNames[b.getRow()][b.getCol()]);
-                                    }
-                                    currMode = "Regular";
-                                }
-                            }
-                            else if (butt.getText().equals("Alpha"))
-                            {
-                                if (!currMode.equals("Alpha")) {
-                                    for (CalcularButton b : topButtons) {
-                                        b.setText(alphaTopNames[b.getRow()][b.getCol()]);
-                                    }
-                                    for (CalcularButton b : botButtons) {
-                                        b.setText(alphaBottomNames[b.getRow()][b.getCol()]);
-                                    }
-                                    currMode = "Alpha";
-                                }
-                                else {
-                                    for (CalcularButton b : topButtons)
-                                    {
-                                        b.setText(regTopNames[b.getRow()][b.getCol()]);
-                                    }
-                                    for (CalcularButton b : botButtons)
-                                    {
-                                        b.setText(regBottomNames[b.getRow()][b.getCol()]);
-                                    }
-                                    currMode = "Regular";
-                                }
-                            }
-                            else if (butt.getText().equals("Regular"))
-                            {
-                                for (CalcularButton b : topButtons)
-                                {
-                                    b.setText(regTopNames[b.getRow()][b.getCol()]);
-                                }
-                                for (CalcularButton b : botButtons)
-                                {
-                                    b.setText(regBottomNames[b.getRow()][b.getCol()]);
-                                }
-                                currMode = "Regular";
-                            }
-                            else
-                            {
-                                currMode = currMode;
-                            }
-                        }
-                    });
+                    this.allButtons.add(butt);
+                    ClickHandler handler = new ClickHandler(console, calculator, allButtons);
+                    butt.setOnAction(handler);
                 }
             }
         }

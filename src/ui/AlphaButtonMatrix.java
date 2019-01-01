@@ -3,9 +3,8 @@ package ui;
 public class AlphaButtonMatrix implements ButtonMatrix {
 
     //alpha button matrix
-
-    private String[][] top;
-    private String[][] bottom;
+    public String[][] top;
+    public String[][] bottom;
 
     public AlphaButtonMatrix ()
     {
@@ -94,16 +93,6 @@ public class AlphaButtonMatrix implements ButtonMatrix {
         this.bottom[7][2] = ".";
         this.bottom[7][3] = "";
         this.bottom[7][4] = "Enter";
-    }
-
-    @Override
-    public String[][] getTop() {
-        return this.top;
-    }
-
-    @Override
-    public String[][] getBottom() {
-        return this.bottom;
     }
 }
 

@@ -1,11 +1,10 @@
 package ui;
 
-import ui.ButtonMatrix;
-
 public class RegButtonMatrix implements ButtonMatrix {
 
-    private String[][] top;
-    private String[][] bottom;
+    //regular button matrix
+    public String[][] top;
+    public String[][] bottom;
 
     public RegButtonMatrix ()
     {
@@ -95,17 +94,5 @@ public class RegButtonMatrix implements ButtonMatrix {
         this.bottom[7][2] = ".";
         this.bottom[7][3] = "SPC";
         this.bottom[7][4] = "Enter";
-    }
-
-    @Override
-    public String[][] getTop()
-    {
-        return this.top;
-    }
-
-    @Override
-    public String[][] getBottom()
-    {
-        return this.bottom;
     }
 }
