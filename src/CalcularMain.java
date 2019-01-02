@@ -1,5 +1,5 @@
 import appl.ClickHandler;
-import javafx.application.Application; 
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
@@ -135,5 +135,4 @@ public class CalcularMain extends Application
         this.console = area;
         return area;
     }
-
 }

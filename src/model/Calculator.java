@@ -1,18 +1,23 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Calculator {
 
-    private ArrayList<String> commandQueue;
+    private String equation;
 
     public enum Mode {SECOND, ALPHA, REGULAR}
-    public Mode mode;
+    private Mode mode;
+
+    private RPNParser rpn;
+    private ShuntYardParser shuntyard;
+
+    public enum CharType {NULL, OPERATOR, NUMBER, SPACE}
 
     public Calculator()
     {
-        this.commandQueue = new ArrayList<>();
         this.mode = Mode.REGULAR;
+        this.equation = "";
+        this.rpn = new RPNParser();
+        this.shuntyard = new ShuntYardParser();
     }
 
     public Mode getMode()
@@ -25,167 +30,56 @@ public class Calculator {
         this.mode = mode;
     }
 
-    public void handleButton(String cmd, String mode)
-    {
-        if (mode.equals("Regular")) {
-            switch (cmd) {
-                case ("7"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("4"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("1"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("0"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("8"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("5"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("2"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("."):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("9"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("6"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("3"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case (" "):
-                    this.commandQueue.add(" ");
-                    DisplayText(5, 133, 8, " ");
-                    break;
-                case ("Enter"):
-                    Interpret(commandQueue);
-                    for(String c : commandQueue)
-                    {
-                        commandQueue.remove(c);
-                    }
-                    break;
-                //OPERATIONS-----------------------------------
-                case ("Y="):
-                    //go into graphing mode
-                    break;
-                case ("Swap"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Sqrt"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Log"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Ln"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("X"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Copy"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Sin"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Arcsin"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Drop"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Cos"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Arccos"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Roll"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Tan"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Arctan"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("Clear"):
-                    //clear
-                    break;
-                case ("^"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("+"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("-"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("*"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                case ("/"):
-                    this.commandQueue.add(cmd);
-                    DisplayText(5, 133, 8, cmd);
-                    break;
-                //MENUS-------------------------------------
-               //case (7):
-                //    MathMenu();
-                 //   break;
+    public void addEquation(String node) {
+        this.equation += node;
+    }
+
+    public void clearEquation() {
+        this.equation = "";
+    }
+
+    public String getEquation() {
+        return equation;
+    }
+
+    public RPNParser getRpn() {
+        return rpn;
+    }
+
+    public void interpret() {
+    }
+
+    public void parse() {
+        formatEquation();
+        this.shuntyard.parseEquation(this.equation);
+        this.rpn.parseEquation(this.shuntyard.getRPN());
+        System.out.println("Answer is: " + this.rpn.getTop());
+    }
+
+    /**
+     * Convert the string equation created from the buttons on the calculator to a properly formatted (with spaces) algebraic equation to be parsed
+     */
+    private void formatEquation() {
+        CharType prevChar = CharType.NULL;
+        CharType currChar;
+        String newEquation = "";
+        for (int i = 0; i < equation.length(); i++)
+        {
+            if ((equation.charAt(i) >= '0' && equation.charAt(i) <= '9') || equation.charAt(i) == '.') { //i is a digit or .
+                currChar = CharType.NUMBER;
             }
+            else if (equation.charAt(i) == ' ') {
+                currChar = CharType.SPACE;
+            }
+            else {
+                currChar = CharType.OPERATOR;
+            }
+
+            if (currChar == CharType.OPERATOR && prevChar == CharType.NUMBER) { newEquation += " " + equation.charAt(i); }
+            else { newEquation += equation.charAt(i); }
+            prevChar = currChar;
         }
-        else if (mode.equals("2nd"))
-        {
-
-        }
-        else if (mode.equals("Alpha"))
-        {
-
-        }
-    }
-
-    private void DisplayText(int i, int i1, int i2, String s) {
-    }
-
-    private void Interpret(ArrayList<String> commandQueue) {
+        System.out.println(newEquation);
+        this.equation = newEquation;
     }
 }

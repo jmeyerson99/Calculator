@@ -10,7 +10,6 @@ public class AlphaButtonMatrix implements ButtonMatrix {
     {
         topConfig();
         bottomConfig();
-
     }
 
     @Override

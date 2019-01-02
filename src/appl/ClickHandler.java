@@ -32,57 +32,186 @@ public class ClickHandler implements EventHandler {
         this.buttons = buttons;
     }
 
-
     @Override
     public void handle(Event event) {
         if (event.getSource() instanceof Button)
         {
             Button button = (Button) event.getSource();
             if (!button.getText().equals("")) { //don't handle buttons that aren't used for anything
-                System.out.println(button.getText());
-                console.setText(button.getText() + " was clicked...");
-
                 Mode currMode = calculator.getMode();
+                String cmd = button.getText();
 
-                if (button.getText().equals("2nd"))
-                {
-                    if (!currMode.equals(Mode.SECOND)) {
-                        for (CalcularButton b : buttons) {
-                            b.setText(b.getSecondName());
+                //This switch handles mode changes between 2nd & Alpha
+                switch (cmd) {
+                    case "2nd":
+                        if (!currMode.equals(Mode.SECOND)) {
+                            for (CalcularButton b : buttons) { b.setText(b.getSecondName()); }
+                            calculator.setMode(Mode.SECOND);
+                        } else {
+                            for (CalcularButton b : buttons) { b.setText(b.getRegName()); }
+                            calculator.setMode(Mode.REGULAR);
                         }
-                        calculator.setMode(Mode.SECOND);
-                    }
-                    else {
-                        for (CalcularButton b : buttons)
-                        {
-                            b.setText(b.getRegName());
+                        break;
+                    case "Alpha":
+                        if (!currMode.equals(Mode.ALPHA)) {
+                            for (CalcularButton b : buttons) { b.setText(b.getAlphaName()); }
+                            calculator.setMode(Mode.ALPHA);
+                        } else {
+                            for (CalcularButton b : buttons) { b.setText(b.getRegName()); }
+                            calculator.setMode(Mode.REGULAR);
                         }
-                        calculator.setMode(Mode.REGULAR);
-                    }
+                        break;
                 }
-                else if (button.getText().equals("Alpha"))
-                {
-                    if (!currMode.equals("Alpha")) {
-                        for (CalcularButton b : buttons) {
-                            b.setText(b.getAlphaName());
+
+                //This switch handles all other buttons based on the calculator's mode
+                switch (calculator.getMode()) {
+                    case REGULAR:
+                        switch (cmd) {
+                            case "0":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "1":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "2":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "3":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "4":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "5":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "6":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "7":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "8":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "9":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case ".":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "SPC":
+                                this.calculator.addEquation(" ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "Enter":
+                                this.calculator.parse();
+                                this.calculator.clearEquation();
+                                console.setText(Double.toString(calculator.getRpn().getTop()));
+                                break;
+                            //OPERATIONS-----------------------------------
+                            case "sin":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "cos":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "tan":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "arcsin":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "arccos":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "arctan":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "Clear":
+                                //clear
+                                this.calculator.clearEquation();
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "+":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "-":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "*":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "/":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "^":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "+/-":
+                                this.calculator.addEquation(cmd + " ");
+                                console.setText(calculator.getEquation());
+                                break;
+                            //MENUS-------------------------------------
                         }
-                        calculator.setMode(Mode.ALPHA);
-                    }
-                    else {
-                        for (CalcularButton b : buttons)
-                        {
-                            b.setText(b.getRegName());
+                        break;
+
+                    case SECOND:
+                        switch (cmd) {
+                            case "sec":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "csc":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "cot":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "arcsec":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "arccsc":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
+                            case "arccot":
+                                this.calculator.addEquation(cmd);
+                                console.setText(calculator.getEquation());
+                                break;
                         }
-                        calculator.setMode(Mode.REGULAR);
-                    }
+                        break;
+
+                    case ALPHA:
+                        break;
                 }
-                else if (button.getText().equals("Regular"))
-                {
-                    for (CalcularButton b : buttons) {
-                        b.setText(b.getRegName());
-                    }
-                    calculator.setMode(Mode.REGULAR);
-                }
+
+
             }
         }
     }

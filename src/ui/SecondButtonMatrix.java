@@ -58,15 +58,15 @@ public class SecondButtonMatrix implements ButtonMatrix {
         this.bottom[1][4] = "";
 
         this.bottom[2][0] = "";
-        this.bottom[2][1] = "Csc";
-        this.bottom[2][2] = "Sec";
-        this.bottom[2][3] = "Cot";
+        this.bottom[2][1] = "csc";
+        this.bottom[2][2] = "sec";
+        this.bottom[2][3] = "cot";
         this.bottom[2][4] = "";
 
         this.bottom[3][0] = "";
-        this.bottom[3][1] = "Arccsc";
-        this.bottom[3][2] = "Arcsec";
-        this.bottom[3][3] = "Arccot";
+        this.bottom[3][1] = "arccsc";
+        this.bottom[3][2] = "arcsec";
+        this.bottom[3][3] = "arccot";
         this.bottom[3][4] = "";
 
         this.bottom[4][0] = "EE";

@@ -163,6 +163,36 @@ public class RPNParser {
     }
 
     /**
+     * Take the sec of the top number in the stack
+     */
+    private void Sec()
+    {
+        double a = stack.pop();
+        double g = Math.cos(1/a);
+        stack.push(g);
+    }
+
+    /**
+     * Take the csc of the top number in the stack
+     */
+    private void Csc()
+    {
+        double a = stack.pop();
+        double g = Math.sin(1/a);
+        stack.push(g);
+    }
+
+    /**
+     * Take the cot of the top number in the stack
+     */
+    private void Cot()
+    {
+        double a = stack.pop();
+        double g = Math.tan(1/a);
+        stack.push(g);
+    }
+
+    /**
      * Take the arcsin of the top number in the stack
      */
     private void Arcsin()
@@ -189,6 +219,46 @@ public class RPNParser {
     {
         double a = stack.pop();
         double g = Math.atan(a);
+        stack.push(g);
+    }
+
+    /**
+     * Take the arcsec of the top number in the stack
+     */
+    private void Arcsec()
+    {
+        double a = stack.pop();
+        double g = Math.acos(1/a);
+        stack.push(g);
+    }
+
+    /**
+     * Take the arccsc of the top number in the stack
+     */
+    private void Arccsc()
+    {
+        double a = stack.pop();
+        double g = Math.asin(1/a);
+        stack.push(g);
+    }
+
+    /**
+     * Take the arcsot of the top number in the stack
+     */
+    private void Arccot()
+    {
+        double a = stack.pop();
+        double g = Math.atan(1/a);
+        stack.push(g);
+    }
+
+    /**
+     * Toggle the sign of the number on the top of the stack
+     */
+    private void SignToggle()
+    {
+        double a = stack.pop();
+        double g = a * (-1);
         stack.push(g);
     }
 
@@ -228,14 +298,29 @@ public class RPNParser {
                     break;
                 case "tan": Tan();
                     break;
+                case "sec": Sec();
+                    break;
+                case "csc": Csc();
+                    break;
+                case "cot": Cot();
+                    break;
                 case "arcsin": Arcsin();
                     break;
                 case "arccos": Arccos();
                     break;
                 case "arctan": Arctan();
                     break;
+                case "arcsec": Arcsec();
+                    break;
+                case "arccsc": Arccsc();
+                    break;
+                case "arccot": Arccot();
+                    break;
+                case "+/-": SignToggle();
+                    break;
                 default: //is a number
-                    stack.push(Double.parseDouble(s));
+                    try {
+                    stack.push(Double.parseDouble(s)); } catch (Exception e) { System.out.println("failed"); }
                     break;
             }
         }

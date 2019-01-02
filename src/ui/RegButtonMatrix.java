@@ -60,24 +60,24 @@ public class RegButtonMatrix implements ButtonMatrix {
         this.bottom[1][4] = "Clear";
 
         this.bottom[2][0] = "Wrt Disk";
-        this.bottom[2][1] = "Sin";
-        this.bottom[2][2] = "Cos";
-        this.bottom[2][3] = "Tan";
+        this.bottom[2][1] = "sin";
+        this.bottom[2][2] = "cos";
+        this.bottom[2][3] = "tan";
         this.bottom[2][4] = "^";
 
-        this.bottom[3][0] = "Root";
-        this.bottom[3][1] = "Arcsin";
-        this.bottom[3][2] = "Arccos";
-        this.bottom[3][3] = "Arctan";
+        this.bottom[3][0] = "root";
+        this.bottom[3][1] = "arcsin";
+        this.bottom[3][2] = "arccos";
+        this.bottom[3][3] = "arctan";
         this.bottom[3][4] = "+";
 
-        this.bottom[4][0] = "Log";
+        this.bottom[4][0] = "log";
         this.bottom[4][1] = "7";
         this.bottom[4][2] = "8";
         this.bottom[4][3] = "9";
         this.bottom[4][4] = "-";
 
-        this.bottom[5][0] = "Ln";
+        this.bottom[5][0] = "ln";
         this.bottom[5][1] = "4";
         this.bottom[5][2] = "5";
         this.bottom[5][3] = "6";
