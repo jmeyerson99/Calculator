@@ -67,112 +67,114 @@ public class ClickHandler implements EventHandler {
                 switch (calculator.getMode()) {
                     case REGULAR:
                         switch (cmd) {
+                            //NUMBERS--------------------------------
                             case "0":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "1":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "2":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "3":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "4":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "5":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "6":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "7":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "8":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "9":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case ".":
                                 this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "SPC":
                                 this.calculator.addEquation(" ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "Enter":
                                 this.calculator.parse();
                                 this.calculator.clearEquation();
-                                console.setText(Double.toString(calculator.getRpn().getTop()));
+                                this.calculator.clearDisplayMsg();
+                                this.calculator.addDisplayMsg(Double.toString(calculator.getRpn().getTop()));
                                 break;
                             //OPERATIONS-----------------------------------
                             case "sin":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "cos":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "tan":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "arcsin":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "arccos":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "arctan":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "Clear":
                                 //clear
                                 this.calculator.clearEquation();
-                                console.setText(calculator.getEquation());
+                                this.calculator.clearDisplayMsg();
                                 break;
                             case "+":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "-":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "*":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "/":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "^":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "+/-":
                                 this.calculator.addEquation(cmd + " ");
-                                console.setText(calculator.getEquation());
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             //MENUS-------------------------------------
                         }
@@ -180,29 +182,44 @@ public class ClickHandler implements EventHandler {
 
                     case SECOND:
                         switch (cmd) {
+                            //OPERATIONS--------------------------------
                             case "sec":
-                                this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addEquation(cmd+ " ");
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "csc":
-                                this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "cot":
-                                this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "arcsec":
-                                this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "arccsc":
-                                this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "arccot":
-                                this.calculator.addEquation(cmd);
-                                console.setText(calculator.getEquation());
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
+                                break;
+                            case "(":
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
+                                break;
+                            case ")":
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
+                                break;
+                            case "Enter":
+                                this.calculator.parse();
+                                this.calculator.clearEquation();
+                                this.calculator.clearDisplayMsg();
+                                this.calculator.addDisplayMsg(Double.toString(calculator.getRpn().getTop()));
                                 break;
                         }
                         break;
@@ -211,7 +228,8 @@ public class ClickHandler implements EventHandler {
                         break;
                 }
 
-
+                console.setText(calculator.getDisplay());
+                if (cmd.equals("Enter")) {this.calculator.clearDisplayMsg();}
             }
         }
     }

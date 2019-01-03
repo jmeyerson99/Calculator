@@ -16,7 +16,6 @@ import java.util.ArrayList;
 /**
  * Main calculator simulation class
  */
-
 public class CalcularMain extends Application
 {
     private String paneMsg = "Calcular v0.1";
@@ -132,6 +131,7 @@ public class CalcularMain extends Application
     {
         TextArea area = new TextArea();
         area.setMaxSize(500, 100);
+        area.setEditable(false);
         this.console = area;
         return area;
     }

@@ -1,23 +1,24 @@
 package model;
 
+import appl.Parser;
+
 public class Calculator {
 
     private String equation;
+    private String display;
 
     public enum Mode {SECOND, ALPHA, REGULAR}
     private Mode mode;
 
-    private RPNParser rpn;
-    private ShuntYardParser shuntyard;
+    private Parser parser;
 
     public enum CharType {NULL, OPERATOR, NUMBER, SPACE}
 
-    public Calculator()
-    {
+    public Calculator() {
         this.mode = Mode.REGULAR;
         this.equation = "";
-        this.rpn = new RPNParser();
-        this.shuntyard = new ShuntYardParser();
+        this.display = "";
+        this.parser = new Parser();
     }
 
     public Mode getMode()
@@ -43,17 +44,25 @@ public class Calculator {
     }
 
     public RPNParser getRpn() {
-        return rpn;
+        return parser.getRpn();
     }
 
-    public void interpret() {
+    public String getDisplay() {
+        return display;
+    }
+
+    public void addDisplayMsg(String node) {
+        this.display += node;
+    }
+
+    public void clearDisplayMsg() {
+        this.display = "";
     }
 
     public void parse() {
         formatEquation();
-        this.shuntyard.parseEquation(this.equation);
-        this.rpn.parseEquation(this.shuntyard.getRPN());
-        System.out.println("Answer is: " + this.rpn.getTop());
+        this.parser.parseExpression(this.equation);
+        System.out.println("Answer is: " + this.parser.getRpn().getTop());
     }
 
     /**

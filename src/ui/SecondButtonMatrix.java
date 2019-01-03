@@ -70,8 +70,8 @@ public class SecondButtonMatrix implements ButtonMatrix {
         this.bottom[3][4] = "";
 
         this.bottom[4][0] = "EE";
-        this.bottom[4][1] = "";
-        this.bottom[4][2] = "";
+        this.bottom[4][1] = "(";
+        this.bottom[4][2] = ")";
         this.bottom[4][3] = "";
         this.bottom[4][4] = "";
 

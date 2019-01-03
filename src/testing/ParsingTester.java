@@ -19,8 +19,7 @@ public class ParsingTester {
         this.parser = new Parser();
     }
 
-    public void parse(String equation)
-    {
+    public void parse(String equation) {
         parser.parseExpression(equation);
         System.out.println("The answer is " + parser.getRpn().getTop());
     }
