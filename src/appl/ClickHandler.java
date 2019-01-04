@@ -114,13 +114,18 @@ public class ClickHandler implements EventHandler {
                                 break;
                             case "SPC":
                                 this.calculator.addEquation(" ");
+                                this.calculator.addDisplayMsg(" ");
+                                break;
+                            case "X":
+                                this.calculator.addEquation(cmd);
                                 this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "Enter":
                                 this.calculator.parse();
                                 this.calculator.clearEquation();
                                 this.calculator.clearDisplayMsg();
-                                this.calculator.addDisplayMsg(Double.toString(calculator.getRpn().getTop()));
+                                try { //use a try catch in case there is no number at the top of the stack
+                                    this.calculator.addDisplayMsg(Double.toString(calculator.getRpn().getTop())); } catch (Exception e) {}
                                 break;
                             //OPERATIONS-----------------------------------
                             case "sin":
@@ -219,7 +224,12 @@ public class ClickHandler implements EventHandler {
                                 this.calculator.parse();
                                 this.calculator.clearEquation();
                                 this.calculator.clearDisplayMsg();
-                                this.calculator.addDisplayMsg(Double.toString(calculator.getRpn().getTop()));
+                                try { //use a try catch in case there is no number at the top of the stack
+                                this.calculator.addDisplayMsg(Double.toString(calculator.getRpn().getTop())); } catch (Exception e) {}
+                                break;
+                            case "Store":
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(" " + cmd);
                                 break;
                         }
                         break;
@@ -227,8 +237,8 @@ public class ClickHandler implements EventHandler {
                     case ALPHA:
                         break;
                 }
-
-                console.setText(calculator.getDisplay());
+                console.setText(calculator.getDisplay()); //set the text
+                console.appendText(""); //notify the listener
                 if (cmd.equals("Enter")) {this.calculator.clearDisplayMsg();}
             }
         }

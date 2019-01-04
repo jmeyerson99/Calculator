@@ -5,9 +5,10 @@ import java.util.*;
 public class ShuntYardParser {
 
     //Constants
-    private final String[] oper = {"+", "-", "*", "/", "^", "ln", "sin", "cos", "tan", "arcsin", "arccos", "arctan"};
-    private final int[] prec = {4, 4, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1};
-    private final String[] assoc = {"l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l"};
+    private final String[] oper = {"+", "-", "*", "/", "^", "ln", "sin", "cos", "tan", "arcsin", "arccos",
+            "arctan", "sec", "csc", "cot", "arcsec", "arccsc", "arccot", "Store"};
+    private final int[] prec = {4, 4, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    private final String[] assoc = {"l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l"};
 
     //Global Variables
     private String alg_eq; //algebraic equation
@@ -132,7 +133,7 @@ public class ShuntYardParser {
             if (tok != ' ') { key += tok; }
 
             if (tok == ' ' || i == alg_eq.length() - 1) {
-                if (!(operators.containsKey(key)) &&  (!(key.equals("(")) && !(key.equals(")")))) { //if key is a number
+                if (!(operators.containsKey(key)) &&  (!(key.equals("(")) && !(key.equals(")")))) { //if key is a number or a variable letter (A-Z)
                     pushRPN(key);
                     key = "";
                 }

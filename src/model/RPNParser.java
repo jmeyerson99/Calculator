@@ -9,12 +9,15 @@ public class RPNParser {
     final double a = .00000001; //limit and derivative
     final double pi = Math.PI; //pi
 
+    private double x; //variable x
+
     private Stack<Double> stack;
     private Queue<String> rpn_queue; //rpn equation
 
     public RPNParser() {
         this.stack = new Stack<>();
         this.rpn_queue = new LinkedList<>();
+        x = 0;
     }
 
     /**
@@ -262,6 +265,15 @@ public class RPNParser {
         stack.push(g);
     }
 
+    /**
+     * Store x with the number on the top of the stack
+     */
+    private void Store()
+    {
+        double a = stack.pop();
+        x = a;
+    }
+
     public void parseEquation(Queue<String> equation)
     {
         this.rpn_queue = equation;
@@ -317,6 +329,10 @@ public class RPNParser {
                 case "arccot": Arccot();
                     break;
                 case "+/-": SignToggle();
+                    break;
+                case "Store": Store();
+                    break;
+                case "X": stack.push(x);
                     break;
                 default: //is a number
                     try {

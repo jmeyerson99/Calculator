@@ -12,6 +12,8 @@ public class Calculator {
 
     private Parser parser;
 
+    private double x; //variable x setting
+
     public enum CharType {NULL, OPERATOR, NUMBER, SPACE}
 
     public Calculator() {
@@ -56,13 +58,22 @@ public class Calculator {
     }
 
     public void clearDisplayMsg() {
-        this.display = "";
+        this.display += "\n";
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
     }
 
     public void parse() {
         formatEquation();
         this.parser.parseExpression(this.equation);
-        System.out.println("Answer is: " + this.parser.getRpn().getTop());
+        try {
+        System.out.println("Answer is: " + this.parser.getRpn().getTop()); } catch (Exception e) {}
     }
 
     /**
