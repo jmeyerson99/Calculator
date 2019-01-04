@@ -9,7 +9,8 @@ public class RPNParser {
     final double a = .00000001; //limit and derivative
     final double pi = Math.PI; //pi
 
-    private double x; //variable x
+    private String var; //variable letter
+    private double vars[]; //variable array (stored using hashcodes)
 
     private Stack<Double> stack;
     private Queue<String> rpn_queue; //rpn equation
@@ -17,7 +18,17 @@ public class RPNParser {
     public RPNParser() {
         this.stack = new Stack<>();
         this.rpn_queue = new LinkedList<>();
-        x = 0;
+        this.vars = new double[26];
+        var = "";
+    }
+
+    /**
+     * Clear the RPN queue
+     */
+    private void clearRPNQueue() {
+        LinkedList<String> removalList = new LinkedList<>();
+        removalList.addAll(this.rpn_queue);
+        this.rpn_queue.removeAll(removalList);
     }
 
     /**
@@ -271,15 +282,29 @@ public class RPNParser {
     private void Store()
     {
         double a = stack.pop();
-        x = a;
+        vars[code(var)] = a;
+        var = "";
     }
 
+
+    private int code(String s)
+    {
+        return s.charAt(0) - 'A';
+    }
+
+    /**
+     * Parse a given set of instructions
+     * @param equation a queue (list) of instructions to execute
+     */
     public void parseEquation(Queue<String> equation)
     {
         this.rpn_queue = equation;
         parse();
     }
 
+    /**
+     * Perform the parsing
+     */
     public void parse()
     {
         for (String s : this.rpn_queue) {
@@ -332,13 +357,56 @@ public class RPNParser {
                     break;
                 case "Store": Store();
                     break;
-                case "X": stack.push(x);
+                //is a letter to store
+                case "A":
+                case "B":
+                case "C":
+                case "D":
+                case "E":
+                case "F":
+                case "G":
+                case "H":
+                case "I":
+                case "J":
+                case "K":
+                case "L":
+                case "M":
+                case "N":
+                case "O":
+                case "P":
+                case "Q":
+                case "R":
+                case "S":
+                case "T":
+                case "U":
+                case "V":
+                case "W":
+                case "X":
+                case "Y":
+                case "Z":
+                    if (rpn_queue.contains("Store")) { var = s;
+                        System.out.println("here"); }
+                    else {
+                        System.out.println("bleh: " + vars[code(s)]);
+                        stack.push(vars[code(s)]); }
                     break;
-                default: //is a number
-                    try {
-                    stack.push(Double.parseDouble(s)); } catch (Exception e) { System.out.println("failed"); }
+
+                //is a number
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9": stack.push(Double.parseDouble(s));
                     break;
+                default:
+                    System.out.println("Unknown identifier: " + s);
             }
         }
+        clearRPNQueue();
     }
 }

@@ -29,6 +29,7 @@ public class Parser {
      */
     private void parseAlgebra(String equation) {
         this.algebraic.parseEquation(equation);
+        this.algebraic.printRPN(); //DEBUGGING
         parseRPN(this.algebraic.getRPN());
     }
 

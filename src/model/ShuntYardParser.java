@@ -16,7 +16,10 @@ public class ShuntYardParser {
     private Queue<String> rpn_queue; //rpn (ouput) equation
     private Map<String, Operator> operators; //operator map
 
-    //Constructor
+    /**
+     * Constructor
+     * Initialize all needed fields & make the operator map
+     */
     public ShuntYardParser() {
         this.op_stack = new Stack<>();
         this.rpn_queue = new LinkedList<>();
@@ -29,6 +32,7 @@ public class ShuntYardParser {
     private void MakeMap()
     {
         this.operators = new HashMap<>();
+        System.out.println("Operator map sizes: " + oper.length + " " + prec.length + " " + assoc.length);
         /* Example:
         plus.operation = "+";
         plus.precedence = 4;

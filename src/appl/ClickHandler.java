@@ -25,6 +25,12 @@ public class ClickHandler implements EventHandler {
     //The calculator itself
     private Calculator calculator;
 
+    /**
+     * Create a click handler for a button
+     * @param console the display
+     * @param calculator the calculator
+     * @param buttons all buttons on the calculator
+     */
     public ClickHandler(TextArea console, Calculator calculator, ArrayList<CalcularButton> buttons)
     {
         this.console = console;
@@ -32,6 +38,10 @@ public class ClickHandler implements EventHandler {
         this.buttons = buttons;
     }
 
+    /**
+     * Handle any type of button click across all modes
+     * @param event button click
+     */
     @Override
     public void handle(Event event) {
         if (event.getSource() instanceof Button)
@@ -116,10 +126,6 @@ public class ClickHandler implements EventHandler {
                                 this.calculator.addEquation(" ");
                                 this.calculator.addDisplayMsg(" ");
                                 break;
-                            case "X":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "Enter":
                                 this.calculator.parse();
                                 this.calculator.clearEquation();
@@ -181,6 +187,10 @@ public class ClickHandler implements EventHandler {
                                 this.calculator.addEquation(cmd + " ");
                                 this.calculator.addDisplayMsg(cmd);
                                 break;
+                            case "X":
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
+                                break;
                             //MENUS-------------------------------------
                         }
                         break;
@@ -229,7 +239,7 @@ public class ClickHandler implements EventHandler {
                                 break;
                             case "Store":
                                 this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(" " + cmd);
+                                this.calculator.addDisplayMsg(" " + cmd + " ");
                                 break;
                         }
                         break;
