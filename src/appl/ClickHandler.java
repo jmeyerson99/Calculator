@@ -79,45 +79,15 @@ public class ClickHandler implements EventHandler {
                         switch (cmd) {
                             //NUMBERS--------------------------------
                             case "0":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "1":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "2":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "3":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "4":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "5":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "6":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "7":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "8":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "9":
-                                this.calculator.addEquation(cmd);
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case ".":
                                 this.calculator.addEquation(cmd);
                                 this.calculator.addDisplayMsg(cmd);
@@ -135,61 +105,30 @@ public class ClickHandler implements EventHandler {
                                 break;
                             //OPERATIONS-----------------------------------
                             case "sin":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "cos":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "tan":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "arcsin":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "arccos":
+                            case "arctan":
+                            case "+":
+                            case "-":
+                            case "*":
+                            case "/":
+                            case "^":
+                            case "+/-":
+                            case "X":
+                            case "ln":
                                 this.calculator.addEquation(cmd + " ");
                                 this.calculator.addDisplayMsg(cmd);
                                 break;
-                            case "arctan":
+                            case "Roll":
                                 this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
+                                this.calculator.addDisplayMsg(cmd + " ");
                                 break;
                             case "Clear":
                                 //clear
                                 this.calculator.clearEquation();
                                 this.calculator.clearDisplayMsg();
-                                break;
-                            case "+":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
-                            case "-":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
-                            case "*":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
-                            case "/":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
-                            case "^":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
-                            case "+/-":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
-                            case "X":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
                                 break;
                             //MENUS-------------------------------------
                         }
@@ -199,33 +138,12 @@ public class ClickHandler implements EventHandler {
                         switch (cmd) {
                             //OPERATIONS--------------------------------
                             case "sec":
-                                this.calculator.addEquation(cmd+ " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "csc":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "cot":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "arcsec":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "arccsc":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "arccot":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case "(":
-                                this.calculator.addEquation(cmd + " ");
-                                this.calculator.addDisplayMsg(cmd);
-                                break;
                             case ")":
                                 this.calculator.addEquation(cmd + " ");
                                 this.calculator.addDisplayMsg(cmd);
@@ -245,10 +163,48 @@ public class ClickHandler implements EventHandler {
                         break;
 
                     case ALPHA:
+                        switch (cmd) {
+                            case "A":
+                            case "B":
+                            case "C":
+                            case "D":
+                            case "E":
+                            case "F":
+                            case "G":
+                            case "H":
+                            case "I":
+                            case "J":
+                            case "K":
+                            case "L":
+                            case "M":
+                            case "N":
+                            case "O":
+                            case "P":
+                            case "Q":
+                            case "R":
+                            case "S":
+                            case "T":
+                            case "U":
+                            case "V":
+                            case "W":
+                            case "X":
+                            case "Y":
+                            case "Z":
+                                this.calculator.addEquation(cmd + " ");
+                                this.calculator.addDisplayMsg(cmd);
+                                break;
+                            case "Enter":
+                                this.calculator.parse();
+                                this.calculator.clearEquation();
+                                this.calculator.clearDisplayMsg();
+                                try { //use a try catch in case there is no number at the top of the stack
+                                    this.calculator.addDisplayMsg(Double.toString(calculator.getRpn().getTop())); } catch (Exception e) {}
+                                break;
+                        }
                         break;
                 }
                 console.setText(calculator.getDisplay()); //set the text
-                console.appendText(""); //notify the listener
+                console.appendText(""); //notify the listener so the automatic scrolling happens
                 if (cmd.equals("Enter")) {this.calculator.clearDisplayMsg();}
             }
         }

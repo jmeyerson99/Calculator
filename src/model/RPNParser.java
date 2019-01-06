@@ -384,29 +384,26 @@ public class RPNParser {
                 case "X":
                 case "Y":
                 case "Z":
-                    if (rpn_queue.contains("Store")) { var = s;
-                        System.out.println("here"); }
-                    else {
-                        System.out.println("bleh: " + vars[code(s)]);
-                        stack.push(vars[code(s)]); }
-                    break;
-
-                //is a number
-                case "0":
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9": stack.push(Double.parseDouble(s));
+                    if (rpn_queue.contains("Store")) { var = s; }
+                    else { stack.push(vars[code(s)]); }
                     break;
                 default:
-                    System.out.println("Unknown identifier: " + s);
+                    if (isANumber(s)) { stack.push(Double.parseDouble(s)); } //if it is a number
+                    else { System.out.println("Unknown identifier: " + s); } //otherwise no one knows what it is
             }
         }
         clearRPNQueue();
+    }
+
+    /**
+     * Check to see if a string is a number
+     * @param s string to check (may or may not be a number)
+     * @return true if it is a number
+     */
+    private boolean isANumber(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (Exception e) { return false; }
     }
 }
