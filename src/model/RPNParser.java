@@ -69,7 +69,7 @@ public class RPNParser {
     }
 
     /**
-     *
+     *Roll the top 3 elements on the stack
      */
     private void Roll()
     {
@@ -143,6 +143,16 @@ public class RPNParser {
     {
         double a = stack.pop();
         double g = Math.log(a);
+        stack.push(g);
+    }
+
+    /**
+     * Take the log of the top number in the stack
+     */
+    private void Log()
+    {
+        double a = stack.pop();
+        double g = Math.log10(a);
         stack.push(g);
     }
 
@@ -356,6 +366,8 @@ public class RPNParser {
                 case "+/-": SignToggle();
                     break;
                 case "Store": Store();
+                    break;
+                case "log": Log();
                     break;
                 //is a letter to store
                 case "A":

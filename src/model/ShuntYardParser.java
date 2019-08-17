@@ -6,9 +6,9 @@ public class ShuntYardParser {
 
     //Constants
     private final String[] oper = {"+", "-", "*", "/", "^", "ln", "sin", "cos", "tan", "arcsin", "arccos",
-            "arctan", "sec", "csc", "cot", "arcsec", "arccsc", "arccot", "Store"};
-    private final int[] prec = {4, 4, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    private final String[] assoc = {"l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l"};
+            "arctan", "sec", "csc", "cot", "arcsec", "arccsc", "arccot", "Store", "log"};
+    private final int[] prec = {4, 4, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    private final String[] assoc = {"l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l", "l"};
 
     //Global Variables
     private String alg_eq; //algebraic equation

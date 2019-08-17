@@ -118,6 +118,7 @@ public class ClickHandler implements EventHandler {
                             case "+/-":
                             case "X":
                             case "ln":
+                            case "log":
                                 this.calculator.addEquation(cmd + " ");
                                 this.calculator.addDisplayMsg(cmd);
                                 break;
