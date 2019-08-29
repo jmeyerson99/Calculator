@@ -18,7 +18,7 @@ public class Calculator {
         this.mode = Mode.REGULAR;
         this.equation = "";
         this.display = "";
-        this.parser = new Parser();
+        this.parser = new Parser(); //make a new parser
     }
 
     public Mode getMode()
