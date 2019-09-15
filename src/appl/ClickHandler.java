@@ -204,7 +204,7 @@ public class ClickHandler implements EventHandler {
                         }
                         break;
                 }
-                console.setText(calculator.getDisplay()); //set the text
+                console.setText(calculator.getDisplay()); //set the text & print
                 console.appendText(""); //notify the listener so the automatic scrolling happens
                 if (cmd.equals("Enter")) {this.calculator.clearDisplayMsg();}
             }

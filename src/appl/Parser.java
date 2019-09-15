@@ -16,7 +16,7 @@ public class Parser {
     }
 
     /**
-     * Parse an agebraic expression entered as a string
+     * Parse an algebraic expression entered as a string
      * @param expression string expression
      */
     public void parseExpression(String expression) {
