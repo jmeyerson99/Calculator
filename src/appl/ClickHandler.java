@@ -8,6 +8,7 @@ import model.Calculator;
 
 import model.Calculator.Mode;
 import ui.CalcularButton;
+import ui.Writer;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,10 @@ import java.util.ArrayList;
 public class ClickHandler implements EventHandler {
 
     //Console (Screen)
-    private TextArea console;
+    //private TextArea console; //uses text console
+
+    //PixelWriter (Screen)
+    private Writer writer; //uses pixel writer console
 
     //All the buttons so they all change (cause I forget how to do observer patterns)
     private ArrayList<CalcularButton> buttons;
@@ -31,9 +35,10 @@ public class ClickHandler implements EventHandler {
      * @param calculator the calculator
      * @param buttons all buttons on the calculator
      */
-    public ClickHandler(TextArea console, Calculator calculator, ArrayList<CalcularButton> buttons)
+    public ClickHandler(TextArea console, Writer writer, Calculator calculator, ArrayList<CalcularButton> buttons)
     {
-        this.console = console;
+        //this.console = console; //uses text console
+        this.writer = writer; //uses pixel writer console
         this.calculator = calculator;
         this.buttons = buttons;
     }
@@ -97,6 +102,7 @@ public class ClickHandler implements EventHandler {
                                 this.calculator.addDisplayMsg(" ");
                                 break;
                             case "Enter":
+                                this.writer.displayText("="); // uses pixel writer console
                                 this.calculator.parse();
                                 this.calculator.clearEquation();
                                 this.calculator.clearDisplayMsg();
@@ -150,6 +156,7 @@ public class ClickHandler implements EventHandler {
                                 this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "Enter":
+                                this.writer.displayText("="); // uses pixel writer console
                                 this.calculator.parse();
                                 this.calculator.clearEquation();
                                 this.calculator.clearDisplayMsg();
@@ -195,6 +202,7 @@ public class ClickHandler implements EventHandler {
                                 this.calculator.addDisplayMsg(cmd);
                                 break;
                             case "Enter":
+                                this.writer.displayText("="); // uses pixel writer console
                                 this.calculator.parse();
                                 this.calculator.clearEquation();
                                 this.calculator.clearDisplayMsg();
@@ -204,9 +212,17 @@ public class ClickHandler implements EventHandler {
                         }
                         break;
                 }
-                console.setText(calculator.getDisplay()); //set the text & print
-                console.appendText(""); //notify the listener so the automatic scrolling happens
-                if (cmd.equals("Enter")) {this.calculator.clearDisplayMsg();}
+                //console.setText(calculator.getDisplay()); //set the text & print                     //uses text console
+                //console.appendText(""); //notify the listener so the automatic scrolling happens     //uses text console
+
+
+                this.writer.displayText(calculator.getDisplay()); //uses pixel writer console
+               // this.writer.clearDisplay(); //uses pixel writer console
+                this.calculator.clearDisplayMsg(); //uses pixel writer console
+                if (cmd.equals("Enter")) {
+                    this.calculator.clearDisplayMsg();
+                    this.writer.newLine(); //uses pixel writer console
+                }
             }
         }
     }

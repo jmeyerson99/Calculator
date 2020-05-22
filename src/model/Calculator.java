@@ -55,9 +55,9 @@ public class Calculator {
         this.display += node;
     }
 
-    public void clearDisplayMsg() {
-        this.display += "\n";
-    }
+    public void clearDisplayMsg()
+    /*{ this.display += "\n"; } //uses text console */
+    { this.display = ""; } //uses pixel writer console
 
     /**
      * Parse the equation entered

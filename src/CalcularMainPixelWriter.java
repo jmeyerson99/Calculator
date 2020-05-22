@@ -1,23 +1,23 @@
+import appl.ClickHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Calculator;
-import ui.AlphaButtonMatrix;
-import ui.CalcularButton;
-import ui.RegButtonMatrix;
-import ui.SecondButtonMatrix;
+import ui.*;
 
 import java.util.ArrayList;
 
 /**
  * Main calculator simulation class
  */
-public class CalcularMain extends Application
+public class CalcularMainPixelWriter extends Application
 {
-    private String paneMsg = "Calcular v0.1";
+    private String paneMsg = "Calcular v0.2";
 
     private String[][] regTopNames;
     private String[][] regBottomNames;
@@ -27,6 +27,8 @@ public class CalcularMain extends Application
 
     private String[][] alphaTopNames;
     private String[][] alphaBottomNames;
+
+    private int w = 240, h = 160; //screen size
 
     /*
     Bottom grid info - 5 columns, 8 rows
@@ -40,7 +42,12 @@ public class CalcularMain extends Application
     private final int topRows = 3;
     private final int topCols = 7;
 
-    private TextArea console;
+    //uses text console
+    //private TextArea console;
+
+    //uses pixel console
+    private ImageView view;
+    private Writer writer;
 
     private ArrayList<CalcularButton> topButtons;
     private ArrayList<CalcularButton> botButtons;
@@ -94,9 +101,9 @@ public class CalcularMain extends Application
                 gridPane.add(butt, j, i);
                 this.botButtons.add(butt);
                 this.allButtons.add(butt);
-                //Commented out so the pixel writer compiles
-                //ClickHandler handler = new ClickHandler(console, calculator, allButtons);
-                //butt.setOnAction(handler);
+                //ClickHandler handler = new ClickHandler(console, calculator, allButtons); //uses text console
+                ClickHandler handler = new ClickHandler(null, writer, calculator, allButtons); //uses pixel console
+                butt.setOnAction(handler);
             }
         }
         gridPane.setHgap(30);
@@ -117,9 +124,9 @@ public class CalcularMain extends Application
                     gridPane.add(butt, j, i);
                     this.topButtons.add(butt);
                     this.allButtons.add(butt);
-                    //Commented out so the pixel writer compiles
-                    //ClickHandler handler = new ClickHandler(console, calculator, allButtons);
-                    //butt.setOnAction(handler);
+                    //ClickHandler handler = new ClickHandler(console, calculator, allButtons); //uses text console
+                    ClickHandler handler = new ClickHandler(null, writer, calculator, allButtons); //uses pixel console
+                    butt.setOnAction(handler);
                 }
             }
         }
@@ -128,12 +135,23 @@ public class CalcularMain extends Application
         return gridPane;
     }
 
-    private TextArea makeScreen()
+    //uses text console
+    /* private TextArea makeScreen()
     {
         TextArea area = new TextArea();
         area.setMaxSize(500, 100);
         area.setEditable(false);
         this.console = area;
         return area;
+    } */
+
+    //uses pixel console
+    private ImageView makeScreen()
+    {
+        WritableImage img = new WritableImage(w, h);
+        PixelWriter pixelWriter = img.getPixelWriter();
+        this.writer = new Writer(pixelWriter, w, h);
+        this.view = new ImageView(img);
+        return this.view;
     }
 }
